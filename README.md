@@ -2,6 +2,8 @@
 
 A Chrome extension for self hosted Jira Software.
 
+Chrome Web Store link [https://chrome.google.com/webstore/detail/jira-server-tools/nffiapablabogfkpckmgbeiocccifbed/](https://chrome.google.com/webstore/detail/jira-server-tools/nffiapablabogfkpckmgbeiocccifbed/).
+
 [![Lyric video of Capstan - Wax Poetic (Acoustic)](http://img.youtube.com/vi/zzLvkMfOJ8M/0.jpg)](http://www.youtube.com/watch?v=zzLvkMfOJ8M "Capstan - Wax Poetic (Acoustic)")
 
 Capstan - Wax Poetic (Acoustic)
