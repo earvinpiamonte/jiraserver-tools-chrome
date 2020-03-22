@@ -1,16 +1,16 @@
 (function(){
-  var manifest = chrome.runtime.getManifest();
+  let manifest = chrome.runtime.getManifest();
 
   document.getElementsByClassName('manifest-version')[0].innerHTML = manifest.version;
 
-  let url = null;
-
   chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs) {
-    url = tabs[0].url;
-    url = new URL(url + '');
+    let tabsURL = tabs[0].url;
+    let newURL = new URL(tabsURL + '');
 
-    let devJiraURLparams = new URLSearchParams(url.search);
-    let jiraSelectedIssueID = devJiraURLparams.get("selectedIssue");
+    let segments = tabsURL.split('/');
+
+    let devJiraURLparams = new URLSearchParams(newURL.search);
+    let jiraSelectedIssueID = devJiraURLparams.get("selectedIssue") || segments[4];
 
     let btnCopyFeatureBranch = document.getElementById('btn-copy-feature-branch');
     let btnCopyBugfixBranch = document.getElementById('btn-copy-bugfix-branch');
