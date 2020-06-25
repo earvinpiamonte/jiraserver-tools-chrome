@@ -3,7 +3,7 @@
   "name": "Jira Server tools",
   "description": "Simple tools for Jira server.",
   "author": "Noel Earvin Piamonte",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "permissions": ["activeTab", "declarativeContent", "storage", "tabs"],
   "background": {
     "scripts": ["background.js"],
