@@ -24,7 +24,7 @@
       }
 
       copyToClipboard(textToCopy, function () {
-        alert(`Copied "${textToCopy}".`)
+        console.log(`Copied "${textToCopy}".`)
       });
     });
 
@@ -36,7 +36,7 @@
       }
 
       copyToClipboard(textToCopy, function(){
-        alert(`Copied "${textToCopy}".`)
+        console.log(`Copied "${textToCopy}".`)
       });
     });
 
@@ -48,7 +48,7 @@
       }
 
       copyToClipboard(textToCopy, function () {
-        alert(`Copied task ID "${textToCopy}".`)
+        console.log(`Copied task ID "${textToCopy}".`)
       });
     });
   });
