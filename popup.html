@@ -4,37 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="tailwind.min.css" />
 
     <title>Jira Server tools</title>
   </head>
-  <body>
-    <h1>Jira Server tools</h1>
-    <form>
-      <div class="form-group">
-        <button class="btn-block" id="btn-copy-feature-branch">
-          Copy feature branch
-        </button>
-      </div>
-      <!-- /.form-group -->
-      <div class="form-group">
-        <button class="btn-block" id="btn-copy-bugfix-branch">
-          Copy bugfix branch
-        </button>
-      </div>
-      <!-- /.form-group -->
-      <div class="form-group">
-        <button class="btn-block" id="btn-copy-task-id">
-          Copy task ID only
-        </button>
-      </div>
-      <!-- /.form-group -->
-    </form>
+  <body class="app-popup bg-white">
+    <section class="py-6">
+      <div class="mx-4">
+        <form class="mb-8">
+          <div class="mb-4">
+            <button
+              type="button"
+              class="px-4 py-2 rounded-md bg-gray-200 text-sm hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 w-full block text-center"
+              id="btn-copy-task-id"
+            >
+              Copy issue ID
+            </button>
+          </div>
+          <!-- /.mb-4 -->
+          <div class="mb-4">
+            <button
+              type="button"
+              class="px-4 py-2 rounded-md bg-gray-200 text-sm hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 w-full block text-center"
+            >
+              Copy issue title
+            </button>
+          </div>
+          <!-- /.mb-4 -->
+        </form>
 
-    <footer>
-      Version <span class="manifest-version"></span
-      ><!-- /.manifest-version -->
-    </footer>
+        <footer class="text-xxs text-gray-600">
+          <h1 class="inline">Jira Server Tools</h1>
+          &middot; v<span class="manifest-version"></span
+          ><!-- /.manifest-version -->
+        </footer>
+      </div>
+      <!-- /.container mx-auto -->
+    </section>
+    <!-- /.py-4 -->
 
     <script src="popup.js"></script>
   </body>

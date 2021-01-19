@@ -1,81 +1,45 @@
-(function(){
-  let manifest = chrome.runtime.getManifest();
+(() => {
+  const { version } = chrome.runtime.getManifest();
 
-  document.getElementsByClassName('manifest-version')[0].innerHTML = manifest.version;
+  const copyToClipboard = (textToCopy, callback) => {
+    navigator.clipboard.writeText(textToCopy);
 
-  chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, function (tabs) {
-    let tabsURL = tabs[0].url;
-    let newURL = new URL(tabsURL + '');
+    if (typeof callback == "function") {
+      callback();
+    }
+  };
 
-    let segments = tabsURL.split('/');
+  document.getElementsByClassName("manifest-version")[0].innerHTML = version;
 
-    let devJiraURLparams = new URLSearchParams(newURL.search);
-    let jiraSelectedIssueID = devJiraURLparams.get("selectedIssue") || segments[4];
+  chrome.tabs.query({ active: true, lastFocusedWindow: true }, function (tabs) {
+    const tabsURL = tabs[0].url;
+    const { search } = new URL(tabsURL + "");
 
-    let btnCopyFeatureBranch = document.getElementById('btn-copy-feature-branch');
-    let btnCopyBugfixBranch = document.getElementById('btn-copy-bugfix-branch');
-    let btnCopyTaskID = document.getElementById('btn-copy-task-id');
+    const segments = tabsURL.split("/");
 
-    btnCopyFeatureBranch.addEventListener('click', function () {
-      let textToCopy = `feature/${jiraSelectedIssueID}`;
+    const devJiraURLparams = new URLSearchParams(search);
+    const jiraSelectedIssueID =
+      devJiraURLparams.get("selectedIssue") || segments[4];
 
-      if (jiraSelectedIssueID === null) {
-        alert(`No selected issue!`); return;
-      }
+    const btnCopyTaskID = document.getElementById("btn-copy-task-id");
 
-      copyToClipboard(textToCopy, function () {
-        console.log(`Copied "${textToCopy}".`)
-      });
-    });
-
-    btnCopyBugfixBranch.addEventListener('click', function () {
-      let textToCopy = `bugfix/${jiraSelectedIssueID}`;
+    btnCopyTaskID.addEventListener("click", () => {
+      const textToCopy = jiraSelectedIssueID;
 
       if (jiraSelectedIssueID === null) {
-        alert(`No selected issue!`); return;
+        alert(`No selected issue!`);
+        return;
       }
 
-      copyToClipboard(textToCopy, function(){
-        console.log(`Copied "${textToCopy}".`)
-      });
-    });
+      copyToClipboard(textToCopy, () => {
+        const originalText = btnCopyTaskID.innerText;
 
-    btnCopyTaskID.addEventListener('click', function () {
-      let textToCopy = `${jiraSelectedIssueID}`;
+        btnCopyTaskID.innerText = btnCopyTaskID.dataset.copiedText ?? "Copied!";
 
-      if (jiraSelectedIssueID === null) {
-        alert(`No selected issue!`); return;
-      }
-
-      copyToClipboard(textToCopy, function () {
-        console.log(`Copied task ID "${textToCopy}".`)
+        setTimeout(() => {
+          btnCopyTaskID.innerText = originalText;
+        }, 1000);
       });
     });
   });
-
-  function copyToClipboard(textToCopy, callback) {
-    let temporaryInput = document.createElement('input');
-
-    temporaryInput.value = textToCopy;
-
-    temporaryInput.setAttribute('readonly', '');
-
-    temporaryInput.style = { display: 'none' };
-
-    document.body.appendChild(temporaryInput);
-
-    temporaryInput.select();
-
-    document.execCommand('copy');
-
-    document.body.removeChild(temporaryInput);
-
-    temporaryInput = undefined;
-
-    if (typeof callback == "function"){
-      callback();
-    }
-  }
-
-
 })();
